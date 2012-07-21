@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>TODO supply a title</title>
+    </head>
+    <body>
+        <ui:composition>
+
+            <div style=" border-top: 1px solid #DAE1E8;
+                 bottom: 10px; position: absolute; color: #597DA3;  display: block; width: 98%;  height: 20px; text-align: right; ">
+
+                <div style="margin-top: 5px;">
+
+
+                    <h:panelGroup >
+
+                        <div style="width: 690px; display: inline-block; text-align: left;">
+<!--                            <div style="display: inline-block; width: 150px; text-align: left; margin-left: 2px; ">-->
+                                Сейчас играет: #{loginBean.amountOfPeopleOnSite}
+<!--                            </div>-->
+                            <div style="display: inline-block; width: 580px; text-align: right;">
+                                (с) MIPT Facemash
+                            </div>
+                        </div>
+                    </h:panelGroup>
+
+                   
+
+                    <h:panelGroup rendered="#{loginBean.online}">
+
+                        |Admin tools: 
+                        <a href="#{request.contextPath}/faces/mainList.xhtml"  style="text-decoration: none;" >Редактирование</a>|
+
+                    </h:panelGroup>
+
+                </div>
+            </div>
+
+        </ui:composition>
+    </body>
+</html>

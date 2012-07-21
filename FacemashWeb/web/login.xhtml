@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ppctu="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+    </h:head>
+    <body>
+        <h2>
+            Only admin can LOGIN
+        </h2>
+        <h:form>
+            <h:inputText value="#{loginBean.secret}" />
+            <ppctu:commandButton value="login" actionListener="#{loginBean.simpleLogin()}" />
+        </h:form>
+    </body>
+</html>

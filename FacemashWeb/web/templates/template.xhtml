@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+            <link href="#{request.contextPath}/css/VkCSS.css" rel="stylesheet" type="text/css" />
+        </h:head>
+
+        <h:body style="background-color: white;">
+            <div class="header" style="overflow: visible;">
+                <a href="#{reguest.getContextPath()}/FacemashWeb/faces/index.xhtml" style="text-decoration: none;" >
+                    <h1 style="font-size: 3em; margin-top: 3px; color: #597DA3; font: 'Lucida Grande', 'Tahoma', 'Verdana','Arial','sans-serif'  ">
+                        MIPT Facemash
+                    </h1> 
+                </a>
+
+            </div>
+
+            <ui:insert name="vk_tabs">
+
+            </ui:insert>
+
+            <ui:insert name="content">
+
+            </ui:insert>
+
+            <ui:insert name="footer">
+
+            </ui:insert>
+
+            <!--            </div>-->
+        </h:body>
+    </f:view>
+</html>

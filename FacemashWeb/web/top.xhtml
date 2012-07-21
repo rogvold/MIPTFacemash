@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+    <body>
+        <ui:composition template="templates/template.xhtml">
+
+            <ui:define name="vk_tabs">
+                <ui:include src="templates/tabs.xhtml">
+                    <ui:param name="tab_no" value="2" />
+                </ui:include>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <h2 style="text-align: center;">
+                    Поздравляем победительниц!
+                </h2>
+                <div style="max-height: 385px; overflow: auto;">
+
+                    <c:forEach items="#{testBean.allGirls}" var="girl" varStatus="num"  >
+                        <div style="width: 600px; margin: 0 auto; border-bottom: 1px solid #DAE1E8; margin-top: 5px; ">
+                            <div style="width: 320px; display: inline-block; vertical-align: top;">
+
+                                <h:outputLabel class="pedit_label" style="width: 200px; color: #{testBean.colorByCount(num.count)};" value="Место:" />
+                                <h:outputLabel value="#{num.count}" style=" color: #{testBean.colorByCount(num.count)};" />
+                                <br/>
+
+                                <h:outputLabel class="pedit_label" style="width: 200px;" value="Рейтинг:" />
+                                <h:outputLabel value="#{testBean.shortDouble(girl.rating)}" />
+                                <br/>
+
+                                <h:outputLabel class="pedit_label" style="width: 200px;" value="Ссылка на странцу:" />
+                                <a href="http://vk.com/#{girl.vkId}" target="blank_">#{girl.vkId}</a><br/>
+
+                                <br/>
+
+                                <h:outputLabel class="pedit_label" style="width: 200px;" value="Редактировать:" rendered="#{loginBean.online}" />
+                                <h:outputLink style="color: #2B587A; text-align: right;" value="#{request.contextPath}/faces/editProfile.xhtml" rendered="#{loginBean.online}">
+                                    <f:param name="girlId" value="#{girl.vkId}" />edit
+                                </h:outputLink>
+
+                            </div>
+                            <div style="display: inline-block;">
+                                <a href="http://vk.com/#{girl.vkId}" target="blank_">
+                                    <img src="#{girl.img}" height="120px;" style="margin-left: 20px;" />
+                                </a>
+                            </div>
+                        </div>
+                    </c:forEach>
+
+                </div>
+            </ui:define>
+
+            <ui:define name="footer">
+                <ui:include src="templates/footer.xhtml" />
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

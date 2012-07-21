@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ppctu="http://primefaces.prime.com.tr/ui">
+    <head>
+        <title>TODO supply a title</title>
+    </head>
+    <h:body>
+        <h3> test</h3>
+
+
+        <c:forEach items="#{testBean.allGirls}" var="girl" >
+
+            <div style="display: block; width: 500px; border-style: solid; border-width: 1px; border-radius: 5px;">
+                <a href="http://vk.com/#{girl.vkId}" target="blank_">#{girl.vkId}</a><br/>
+               
+                <img src="#{request.getContextPath()}/facemash/#{girl.img}" style="width: 150px; border-style: solid; border-width: 2px; border-color: #45688E;"/>
+               
+                <div style="display: inline-block; width: 150px;">
+
+                    rating: 
+                    <span style="color: red; font-size: 15px;">
+                        #{girl.rating}
+                    </span>
+                </div>
+                <div style="display: inline-block; font-size: 6em; color: red;">
+                    
+                </div>
+                <div style="width: 80%; font-size: 1em;">
+                    
+                </div>
+            </div>
+            <br/>
+        </c:forEach>
+
+
+    </h:body>
+</html>

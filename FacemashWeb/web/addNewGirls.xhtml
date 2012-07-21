@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+
+            <h:outputLabel value="filename" /> 
+            <h:inputText value="#{addGirlBean.filename}" /> <br/>
+
+
+
+            <h:commandButton value="add" actionListener="#{addGirlBean.addGirls()}" /><br/>
+
+            <h:outputLabel value="delete all girls" /> <br/>
+
+            <h:outputText value="secret" /> <h:inputText value="#{addGirlBean.secret}" />
+            
+            <h:commandButton value="delete" actionListener="#{addGirlBean.deleteGirls()}" />
+
+<!--            <h:graphicImage -->
+            
+        </h:form>
+    </h:body>
+</html>
+

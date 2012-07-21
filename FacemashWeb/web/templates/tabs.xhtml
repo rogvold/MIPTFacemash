@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>TODO supply a title</title>
+    </head>
+    <body>
+        <ui:composition>
+            <div class="tabs">
+<!--                <h:panelGroup style="float: right;">
+                                        <li>
+                    <a href="#{request.contextPath}/faces/feedback.xhtml" class="create_act" ><span class="tl"><span class="tr">Оставить отзыв</span></span></a>
+                                        </li>
+                </h:panelGroup>-->
+                
+                
+                <ul>
+                    <h:panelGroup rendered="#{tab_no==1}"> 
+                        <li class="current_link">
+                            <span><span class="tl"><span class="tr">Главная</span></span></span>
+                        </li>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{tab_no!=1}">
+                        <li>
+                            <a href="#{request.contextPath}/faces/index.xhtml"><span class="tl"><span class="tr">Главная</span></span></a>
+                        </li>
+                    </h:panelGroup>
+
+
+                    <h:panelGroup rendered="#{tab_no==2}"> 
+                        <li class="current_link">
+                            <span><span class="tl"><span class="tr">Top 50</span></span></span>
+                        </li>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{tab_no!=2}">
+                        <li>
+                            <a href="#{request.contextPath}/faces/top.xhtml"><span class="tl"><span class="tr">Top 50</span></span></a>
+                        </li>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{tab_no==3}"> 
+                        <li class="current_link">
+                            <span><span class="tl"><span class="tr">О проекте</span></span></span>
+                        </li>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{tab_no!=3}">
+                        <li>
+                            <a href="#{request.contextPath}/faces/about.xhtml"><span class="tl"><span class="tr">О проекте</span></span></a>
+                        </li>
+                    </h:panelGroup>
+
+                   
+
+
+
+
+                </ul>
+            </div>
+
+
+        </ui:composition>
+    </body>
+</html>

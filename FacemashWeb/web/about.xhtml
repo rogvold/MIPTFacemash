@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <body>
+        <ui:composition template="templates/template.xhtml">
+
+            <ui:define name="vk_tabs">
+                <ui:include src="templates/tabs.xhtml">
+                    <ui:param name="tab_no" value="3" />
+                </ui:include>
+            </ui:define>
+
+            <ui:define name="footer">
+                <ui:include src="templates/footer.xhtml" />
+            </ui:define>
+            
+        </ui:composition>
+
+    </body>
+</html>
