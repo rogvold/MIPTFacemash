@@ -3,3 +3,9 @@
 # Package Files #
 *.war
 *.ear
+/FacemashEE/dist/
+/FacemashEE/build/
+/FacemashCore/build/
+/FacemashCore/dist/
+/FacemashWeb/dist/
+/FacemashWeb/build/

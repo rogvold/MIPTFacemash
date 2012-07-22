@@ -40,43 +40,30 @@ public class authorisation extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            /*
-             * TODO output your page here. You may use following sample code.
-             */
             String viewer_id = request.getParameter("viewer_id");
             String api_id = request.getParameter("api_id");
-//            String api_secret = confMan.getString("api_secret");
             String api_secret = "9WiqiUbaBTAUzp8HiJxV";
             String auth_key = getMD5(api_id + "_" + viewer_id + "_" + api_secret);
+            String s = "index.xhtml";
             if (auth_key.equals(request.getParameter("auth_key")) == false) {
                 System.out.println("MD5(api_id+_+viewer+_+api_secret) and auth_key are not equal");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet authorisation</title>");
-                out.println("</head>");
-                out.println("<body>");
-//                out.println("Hacking");
-                out.println("Error");
-                out.println("viewer_id = " + viewer_id);
-                out.println("api_id = " + api_id);
-                out.println("api_secret = " + api_secret);
-                out.println("auth_key should be " + auth_key);
-                out.println("received auth_key = " + request.getParameter("auth_key"));
-
-                out.println("</body>");
-                out.println("</html>");
-            }
-            String s = "index.xhtml";
-            if (!SessionUtils.isSignedIn()) {
-//                while(!SessionUtils.isSignedIn()){
-                System.out.println("is not signed in. trying to make authorisation");
-//                User user = openIdAuthorisation(viewer_id);
                 System.out.println("viewer_id = " + viewer_id);
-
-//                out.println("user = " + user);
-//                }
-//                if (SessionUtils.isSignedIn()) {
-                System.out.println("openIdAuthorisation success... ");
+                System.out.println("api_id = " + api_id);
+                System.out.println("api_secret = " + api_secret);
+                System.out.println("auth_key should be " + auth_key);
+                System.out.println("received auth_key = " + request.getParameter("auth_key"));
+                if (!SessionUtils.isSignedIn()) { // TODO : erase this block
+                    System.out.println("if not signed in. pequest is not from vk probably");
+                    FacesContext facesContext = FacesContext.getCurrentInstance();
+                    session = (HttpSession) facesContext.getExternalContext().getSession(true);
+                    SessionListener.setSessionAttribute(session, "user", "notVK");
+                    response.sendRedirect(s);
+                    return;
+                }
+            }
+            if (!SessionUtils.isSignedIn()) {
+                System.out.println("if not signed in. trying to make authorisation");
+                System.out.println("viewer_id = " + viewer_id);
                 FacesContext facesContext = FacesContext.getCurrentInstance();
                 session = (HttpSession) facesContext.getExternalContext().getSession(true);
                 SessionListener.setSessionAttribute(session, "user", "id" + viewer_id);
@@ -84,9 +71,7 @@ public class authorisation extends HttpServlet {
                 if (WebSession.ADMINISTRATOR_VK_ID.equals("id" + viewer_id) || WebSession.MODERATOR_VK_ID.equals("id" + viewer_id)) {
                     SessionListener.setSessionAttribute(session, "loggedIn", true);
                 }
-
                 response.sendRedirect(s);
-//                }
             } else {
                 response.sendRedirect(s);
             }

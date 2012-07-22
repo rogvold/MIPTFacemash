@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSessionListener;
  */
 public class SessionListener implements HttpSessionListener {
 
-    private static final Map<String, HttpSession> map = Collections.synchronizedMap(new HashMap<String, HttpSession>(100));
+    private static final Map<String, HttpSession> map = Collections.synchronizedMap(new HashMap<String, HttpSession>(500));
     @EJB
     SessionManagerLocal sm;
 
@@ -102,7 +102,16 @@ public class SessionListener implements HttpSessionListener {
         return lst;
     }
 
+    public static boolean sessionExists(String vkId) {
+        if (!getAllUserSessions(vkId).isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static int getSessionsCount() {
+
         return map.size();
     }
 
@@ -111,7 +120,25 @@ public class SessionListener implements HttpSessionListener {
     }
 
     public static int getOnlineAmount() {
-        return map.size();
+        int k = 0;
+        Set<String> set = new HashSet();
+        Set<Map.Entry<String, HttpSession>> entrySet = map.entrySet();
+        if (entrySet == null) {
+            return 0;
+        }
+        for (Map.Entry<String, HttpSession> entry : entrySet) {
+            HttpSession session = (HttpSession) entry.getValue();
+            if (!isSessionValid(session)) {
+                continue;
+            }
+            String u = (String) session.getAttribute("user");
+            if (u == null) {
+                continue;
+            }
+            set.add(u);
+        }
+        k = set.size();
+        return  k;
     }
 
     public static boolean isRequestedSessionValid() {
