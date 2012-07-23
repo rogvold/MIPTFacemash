@@ -86,4 +86,12 @@ public class ModerationBean implements Serializable {
         initShort();
     }
     
+    public List<Girl> getBlackList(){
+        return gm.getBlackList();
+    }
+    
+    public void recover(Long girlId){
+        gm.recoverGirl(girlId);
+    }
+    
 }

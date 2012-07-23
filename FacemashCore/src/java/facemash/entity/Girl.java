@@ -15,6 +15,11 @@ import javax.persistence.*;
 @Table
 public class Girl implements Serializable {
 
+    public static final int STATUS_NORMAL = 0;
+    public static final int STATUS_DELETED = 1;
+    public static final int STATUS_HIDDEN = 2;
+    public static final int STATUS_MODERATION = 3;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,13 +30,13 @@ public class Girl implements Serializable {
     private String img;
     @Column
     private String name;
-
     @Column
     private double rating;
-    
     @Column
     private int amountOfTournaments;
-    
+    @Column
+    private int status;
+
     public Girl() {
     }
 
@@ -43,6 +48,16 @@ public class Girl implements Serializable {
         this.amountOfTournaments = 0;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    
+    
     public double getRating() {
         return rating;
     }
@@ -59,9 +74,6 @@ public class Girl implements Serializable {
         this.amountOfTournaments = amountOfTournaments;
     }
 
-    
-    
-    
     public String getImg() {
         return img;
     }
@@ -86,8 +98,6 @@ public class Girl implements Serializable {
         this.vkId = vkId;
     }
 
-    
-    
     public Long getId() {
         return id;
     }

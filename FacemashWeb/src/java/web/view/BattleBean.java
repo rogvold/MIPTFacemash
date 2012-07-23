@@ -75,4 +75,10 @@ public class BattleBean implements Serializable {
         }
 
     }
+    
+    public void addGirlToModeration(Long girlId){
+        System.out.println("girl id = " + girlId + " added to black list");
+        gm.toModeration(girlId);
+    }
+    
 }

@@ -127,7 +127,7 @@ public class GirlManager implements GirlManagerLocal {
     @Override
     public Girl getRandomGirl() {
         try {
-            List<Girl> list = em.createQuery("select g from Girl g order by g.id asc").getResultList();
+            List<Girl> list = em.createQuery("select g from Girl g where g.status= " + Girl.STATUS_NORMAL + " order by g.id asc").getResultList();
             int r = random.nextInt(MAX_RANDOM) % list.size();
             return list.get(r);
         } catch (Exception e) {
@@ -203,7 +203,7 @@ public class GirlManager implements GirlManagerLocal {
     @Override
     public List<Girl> getAllGirls() {
         try {
-            Query q = em.createQuery("select g from Girl g order by g.rating desc");
+            Query q = em.createQuery("select g from Girl g where g.status= " + Girl.STATUS_NORMAL + " order by g.rating desc");
             q.setMaxResults(MAX_GIRLS_AMOUNT_IN_LIST);
             return q.getResultList();
         } catch (Exception exc) {
@@ -259,7 +259,7 @@ public class GirlManager implements GirlManagerLocal {
     @Override
     public List<Girl> getAllGirls(int amount) {
         try {
-            Query q = em.createQuery("select g from Girl g order by g.rating asc");
+            Query q = em.createQuery("select g from Girl g where g.status= " + Girl.STATUS_NORMAL + "  order by g.rating asc");
             q.setMaxResults(amount);
             return q.getResultList();
         } catch (Exception exc) {
@@ -277,6 +277,8 @@ public class GirlManager implements GirlManagerLocal {
             Girl g = em.find(Girl.class, girlId);
             System.out.println("removing girl id = " + girlId);
 //            em.
+//            g.setStatus(Girl.STATUS_DELETED);
+//            em.merge(g);
             em.remove(g);
 //            em.getTransaction().commit();
 //            Query q = em.createQuery("delete from Girl g where g.id=" + girlId);
@@ -303,6 +305,42 @@ public class GirlManager implements GirlManagerLocal {
             return girl;
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    @Override
+    public void toModeration(Long girlId) {
+//        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            Girl g = em.find(Girl.class, girlId);
+            g.setStatus(Girl.STATUS_MODERATION);
+            em.merge(g);
+        } catch (Exception e) {
+            System.out.println("cannot add girl to moderation");
+        }
+    }
+
+    @Override
+    public List<Girl> getBlackList() {
+//        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            Query q = em.createQuery("select g from Girl g where g.status=" + Girl.STATUS_MODERATION + " order by g.id asc");
+            List<Girl> list = q.getResultList();
+            return list;
+        } catch (Exception e) {
+            System.out.println("cannot get black list exc = " + e);
+        }
+        return null;
+    }
+
+    @Override
+    public void recoverGirl(Long girlId) {
+        try {
+            Girl g = em.find(Girl.class, girlId);
+            g.setStatus(Girl.STATUS_NORMAL);
+            em.merge(g);
+        } catch (Exception e) {
+            System.out.println("cannot recover girl; exc = " + e);
         }
     }
 }

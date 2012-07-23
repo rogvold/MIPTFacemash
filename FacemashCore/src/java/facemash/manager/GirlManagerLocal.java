@@ -45,6 +45,10 @@ public interface GirlManagerLocal {
     
     public Girl updateGirlImage(Long girlId, String newImg);
     
+    public void toModeration(Long girlId);
     
+    public List<Girl> getBlackList();
+    
+    public void recoverGirl(Long girlId);
     
 }
