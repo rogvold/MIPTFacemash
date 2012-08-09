@@ -24,10 +24,7 @@ and open the template in the editor.
 
             <ui:define name="content">
 
-
                 <h2 style="text-align: center;">Левая или правая ?</h2>
-
-
 
                 <h:form>
                     <div style="display: block; width: 600px; margin: 0 auto;  border-style: solid; border-width: 1px; border-color: #DAE1E8; border-radius: 5px; ">
@@ -39,14 +36,11 @@ and open the template in the editor.
                                             <ppctu:commandLink  onclick="javascript:this.style.color='white'" style="text-align: right; color: #597DA3;" process="@this" action="#{battleBean.addGirlToModeration(battleBean.first.id)}" >
                                                 Плохая фотка
                                             </ppctu:commandLink>
-                                            |
+                                            
                                             <h:outputLink  style="color: #2B587A; text-align: right;" rendered="#{loginBean.online}" value="#{request.contextPath}/faces/editProfile.xhtml">
-                                                <f:param name="girlId" value="#{battleBean.first.vkId}" />  edit
+                                                <f:param name="girlId" value="#{battleBean.first.vkId}" />  | edit
                                             </h:outputLink>
                                         </div>
-
-
-
 
                                         <h:commandLink  actionListener="#{battleBean.firstClicked()}" >
                                             <div style="max-height: 300px; overflow: auto; width: 220px;">
@@ -67,9 +61,9 @@ and open the template in the editor.
                                             <ppctu:commandLink  onclick="javascript:this.style.color='white'" style="text-align: right; color: #597DA3;" process="@this" action="#{battleBean.addGirlToModeration(battleBean.second.id)}" >
                                                 Плохая фотка
                                             </ppctu:commandLink>
-                                            |
+                                            
                                             <h:outputLink style="color: #2B587A; text-align: right;" rendered="#{loginBean.online}" value="#{request.contextPath}/faces/editProfile.xhtml">
-                                                <f:param name="girlId" value="#{battleBean.second.vkId}" />edit
+                                                <f:param name="girlId" value="#{battleBean.second.vkId}" />|edit
                                             </h:outputLink>
                                         </div>
 
@@ -88,7 +82,7 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </h:panelGroup>
-                        <div style="width: 550px; margin: 0 auto; text-align: center;">
+                        <div style="width: 550px; margin: 0 auto; text-align: center; margin-top: 10px;">
                             <ppctu:commandButton actionListener="#{battleBean.skipClicked()}" update="arena" style=" color: #597DA3; font-size: 17px; margin-bottom: 20px;" value="Пропустить" />
 
                         </div>
@@ -105,39 +99,6 @@ and open the template in the editor.
             </ui:define>
 
         </ui:composition>
-
-
-
-
-
-
-
-
-        <!--        <div style="display: block; width: 770px; height: 600px;  border-width: 1px; border-color: #2B587A; border-style: solid;">
-        
-                <div class="header" style="overflow: visible;">
-                    <a href="javascript:void();" target="_top" class="logo"></a>
-                </div>
-        
-                <div class="tabs">
-                    <ul>
-                        <li class="current_link">
-                            <span><span class="tl"><span class="tr">Главная</span></span></span>
-                        </li>
-                        <li>
-                            <a href="javascript:void();"><span class="tl"><span class="tr">Мои заказы</span></span></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void();"><span class="tl"><span class="tr">Мои сообщения</span></span></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void();"><span class="tl"><span class="tr">Мой профиль</span></span></a>
-                        </li>
-                    </ul>
-                </div>
-                    
-                    
-                </div>-->
 
     </body>
 </html>

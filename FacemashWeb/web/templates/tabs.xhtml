@@ -11,13 +11,13 @@ and open the template in the editor.
     <body>
         <ui:composition>
             <div class="tabs">
-<!--                <h:panelGroup style="float: right;">
-                                        <li>
-                    <a href="#{request.contextPath}/faces/feedback.xhtml" class="create_act" ><span class="tl"><span class="tr">Оставить отзыв</span></span></a>
-                                        </li>
-                </h:panelGroup>-->
-                
-                
+                <!--                <h:panelGroup style="float: right;">
+                                                        <li>
+                                    <a href="#{request.contextPath}/faces/feedback.xhtml" class="create_act" ><span class="tl"><span class="tr">Оставить отзыв</span></span></a>
+                                                        </li>
+                                </h:panelGroup>-->
+
+
                 <ul>
                     <h:panelGroup rendered="#{tab_no==1}"> 
                         <li class="current_link">
@@ -42,6 +42,18 @@ and open the template in the editor.
                         </li>
                     </h:panelGroup>
 
+                    <h:panelGroup rendered="#{tab_no==4}"> 
+                        <li class="current_link">
+                            <span><span class="tl"><span class="tr">Чат</span></span></span>
+                        </li>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{tab_no!=4}">
+                        <li>
+                            <a href="#{request.contextPath}/faces/chat.xhtml"><span class="tl"><span class="tr">Чат</span></span></a>
+                        </li>
+                    </h:panelGroup>
+
+
                     <h:panelGroup rendered="#{tab_no==3}"> 
                         <li class="current_link">
                             <span><span class="tl"><span class="tr">О проекте</span></span></span>
@@ -53,7 +65,7 @@ and open the template in the editor.
                         </li>
                     </h:panelGroup>
 
-                   
+
 
 
 
