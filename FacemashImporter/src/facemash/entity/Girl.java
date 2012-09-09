@@ -5,14 +5,13 @@
 package facemash.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
 
 /**
  *
  * @author rogvold
  */
-@Entity
-@Table
+
 public class Girl implements Serializable {
 
     public static final double DEFAULT_RATING = 400.0;
@@ -21,20 +20,19 @@ public class Girl implements Serializable {
     public static final int STATUS_HIDDEN = 2;
     public static final int STATUS_MODERATION = 3;
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
-    @Column
+
     private String vkId;
-    @Column
+
     private String img;
-    @Column
+
     private String name;
-    @Column
+
     private double rating;
-    @Column
+
     private int amountOfTournaments;
-    @Column
+
     private int status;
 
     public Girl() {
@@ -135,6 +133,6 @@ public class Girl implements Serializable {
 
     @Override
     public String toString() {
-        return "facemash.entity.Girl[ id=" + id + "\n vkId = "+vkId+"; \n img_src = "+img+" ]";
+        return "\n facemash.entity.Girl[ id=" + id + "\n vkId = "+vkId+"; \n img_src = "+img+" ]";
     }
 }

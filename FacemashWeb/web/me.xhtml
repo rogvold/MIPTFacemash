@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:ppctu="http://primefaces.prime.com.tr/ui">
+
+
+    <body>
+        <ui:composition template="templates/template.xhtml">
+
+            <ui:define name="vk_tabs">
+                <ui:include src="templates/tabs.xhtml">
+                    <ui:param name="tab_no" value="7" />
+                </ui:include>
+            </ui:define>
+
+            <ui:define name="content">
+                <h2>
+                    <c:if test="#{webSession.registered}">
+                        Ваша анкета есть в системе!
+                    </c:if>
+
+                    <c:if test="#{!webSession.registered}">
+                        Вашей анкеты еще нет в системе. Вы можете подать заявку.
+                    </c:if>
+                </h2>
+
+                <div class="index_description" style="
+                     height: 130px; width: 600px;
+                     color: #666;
+                     padding: 10px;
+                     text-align: center;
+                     font-size: 13px;
+                     margin: 0 auto;
+                     margin-top: 50px;
+                     ">
+
+                    <!--                    //-->
+                    <h:panelGroup rendered="#{webSession.registered}"  style="width: 90%; display: block;">
+                        <h:panelGroup id="ava">
+                            <div style="max-height: 300px; overflow: auto; width: 220px; margin: 0 auto;">
+                                <img src="#{moderationBean.imgByVkId(webSession.vkId)}"  style="width: 200px; border-style: solid; border-width: 1px; border-color: #45688E;"/>
+                            </div>
+                        </h:panelGroup>
+                        <h:form prependId="false">
+                            <div style="width: 100%; display: block;">
+                                Вставьте сюда ссылку на фото <h:inputText style="width: 200px;" value="#{moderationBean.updatingImg}" /> 
+                                <ppctu:commandButton value="Обновить фото" update="ava" actionListener="#{moderationBean.updateGirl2(webSession.vkId)}" /> <br/> <br/>
+                                <hr/>
+                                <ppctu:commandButton style="color: red;" value="Удалить аккаунт из системы!" actionListener="#{moderationBean.deleteGirl2(webSession.vkId)}" />
+                            </div>
+                        </h:form>
+                    </h:panelGroup>
+
+                    <h:panelGroup  rendered="#{!webSession.registered}" id="nr">
+                        <h:form prependId="false" >
+                            <div style="width: 100%; display: block;">
+                                <ppctu:commandButton rendered="#{proposalBean.text.equals(' ')}" actionListener="#{proposalBean.propose(webSession.vkId)}" style="margin: 0 auto;" update="nr" value="Подать заявку!" />
+                            </div>
+                        </h:form><br/>
+                        <h:panelGroup id="congr" >
+                            <div style="width: 100%; display: block; text-align: center;">
+                                #{proposalBean.text}
+                            </div>
+
+                        </h:panelGroup>
+
+                    </h:panelGroup>
+
+
+                </div>
+
+            </ui:define>
+
+            <ui:define name="footer">
+                <ui:include src="templates/footer.xhtml" />
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

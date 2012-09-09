@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ppctu="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+    </h:head>
+    <body>
+        <h:form>
+            paste here html generated source (from Firefox)<br/>
+            <h:inputTextarea style="width: 60em; height: 40em;" value ="#{toolsBean.inputHtml}"  /><br/>
+            <ppctu:commandButton value="add girls with large avatar " actionListener="#{toolsBean.addGirlsWithLargePhotos()}" style="width: 50em; height: 3em; color: red;" update="gen" /><br/>
+             <br/>
+            <h:panelGroup id="gen">
+                #{toolsBean.text}
+            </h:panelGroup>
+        </h:form>
+    </body>
+</html>

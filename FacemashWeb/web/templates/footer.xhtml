@@ -19,7 +19,7 @@ and open the template in the editor.
 
 <!--                    <h:panelGroup >-->
 
-                        <div style="width: 540px; display: inline-block; text-align: left;">
+                        <div style="width: 500px; display: inline-block; text-align: left;">
                             <!--                            <div style="display: inline-block; width: 150px; text-align: left; margin-left: 2px; ">-->
                             Сейчас голосует: #{loginBean.amountOfPeopleOnSite}
                             <!--                            </div>-->
@@ -29,27 +29,17 @@ and open the template in the editor.
                         </div>
 <!--                    </h:panelGroup>-->
 
-                    <a href="http://miptfacemash.reformal.ru" onclick="window.open('http://miptfacemash.reformal.ru');return false;">Oтзывы и предложения</a><script type="text/javascript">
-                        var reformalOptions = {
-                            project_id: 68282,
-                            show_tab: false,
-                            project_host: "miptfacemash.reformal.ru",
-                            force_new_window: true
-                        };
-    
-                        (function() {
-                            var script = document.createElement('script');
-                            script.type = 'text/javascript'; script.async = true;
-                            script.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'media.reformal.ru/widgets/v3/reformal.js';
-                            document.getElementsByTagName('head')[0].appendChild(script);
-                        })();
-                    </script><noscript><a href="http://reformal.ru"><img src="http://media.reformal.ru/reformal.png" /></a><a href="http://miptfacemash.reformal.ru">Oтзывы и предложения для MIPT Facemash</a></noscript>
+<span style="">
+© Сделал какой-то физтех
+</span>
+
 
                     <h:panelGroup rendered="#{loginBean.online}">
 
                         |Admin tools: 
                         <a href="#{request.contextPath}/faces/mainList.xhtml"  style="text-decoration: none;" >Редактирование</a>|
-                        <a href="#{request.contextPath}/faces/blackList.xhtml"  style="text-decoration: none;" >Черный список</a>
+                        <a href="#{request.contextPath}/faces/blackList.xhtml"  style="text-decoration: none;" >Черный список</a>|
+                        <a href="#{request.contextPath}/faces/proposals.xhtml"  style="text-decoration: none;" >Заявки</a>
 
                     </h:panelGroup>
 

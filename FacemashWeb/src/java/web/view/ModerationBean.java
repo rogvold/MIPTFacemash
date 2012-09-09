@@ -12,25 +12,21 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author rogvold
  */
-@ManagedBean(name="moderationBean")
+@ManagedBean(name = "moderationBean")
 @SessionScoped
 public class ModerationBean implements Serializable {
-    
+
     @EJB
     GirlManagerLocal gm;
-    
     public static final int pSize = 20;
-    
     private List<Girl> fullList;
     private List<Girl> shortList;
     private int page;
-    
     private String updatingImg;
 
     public String getUpdatingImg() {
@@ -40,8 +36,6 @@ public class ModerationBean implements Serializable {
     public void setUpdatingImg(String updatingImg) {
         this.updatingImg = updatingImg;
     }
-    
-    
 
     public int getPage() {
         return page;
@@ -54,44 +48,75 @@ public class ModerationBean implements Serializable {
     public List<Girl> getShortList() {
         return shortList;
     }
-    
-    
-    
+
     @PostConstruct
-    private void init(){
+    private void init() {
         fullList = gm.getAllGirls(10000);
         System.out.println("fulllist lendth=" + fullList.size());
         initShort();
     }
-    
-    private void initShort(){
-        shortList = fullList.subList(page*pSize, (page+1)*pSize);
-        page+=1;
+
+    private void initShort() {
+        shortList = fullList.subList(page * pSize, (page + 1) * pSize);
+        page += 1;
     }
-    
-    public List<Girl> getAllGirls(){
+
+    public List<Girl> getAllGirls() {
         return gm.getAllGirls(10000);
     }
-    
-    public void deleteGirl(Long girlId){
+
+    public void deleteGirl(Long girlId) {
         gm.deleteGirl(girlId);
     }
-    
-    public void updateGirl(Long girlId){
-        gm.updateGirlImage(girlId,updatingImg);
+
+    public void deleteGirl(String ownerVkId, Long ownerId) {
+        gm.deleteGirl(ownerVkId, ownerId);
     }
-    
-    public void nextPage(){
+
+    public void deleteGirl2(String ownerVkId) {
+        try {
+            Girl g = gm.getGirlByVkId(ownerVkId);
+            gm.deleteGirl(g.getId());
+        } catch (Exception e) {
+        }
+    }
+
+    public void updateGirl(Long girlId) {
+        gm.updateGirlImage(girlId, updatingImg);
+    }
+
+    public void updateGirl2(String vkId) {
+        try {
+            Girl g = gm.getGirlByVkId(vkId);
+            gm.updateGirlImage(g.getId(), updatingImg);
+        } catch (Exception e) {
+        }
+
+    }
+
+//    public void updateGirl(String ownerVkId,Long girlId) {
+//        gm.updateGirlImage(girlId, updatingImg);
+//    }
+    public String imgByVkId(String vkId) {
+        Girl g = gm.getGirlByVkId(vkId);
+        try {
+            return g.getImg();
+        } catch (Exception e) {
+            return "";
+        }
+
+    }
+
+    public void nextPage() {
         System.out.println("nextPage...");
         initShort();
     }
-    
-    public List<Girl> getBlackList(){
+
+    public List<Girl> getBlackList() {
         return gm.getBlackList();
     }
-    
-    public void recover(Long girlId){
+
+    public void recover(Long girlId) {
         gm.recoverGirl(girlId);
     }
-    
 }

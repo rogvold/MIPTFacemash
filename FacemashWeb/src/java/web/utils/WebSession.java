@@ -1,17 +1,13 @@
 package web.utils;
 
+import facemash.manager.GirlManagerLocal;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseEvent;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-//import org.apache.log4j.Logger;
-import web.utils.SessionListener;
-import web.utils.SessionUtils;
 
 /**
  *
@@ -24,12 +20,27 @@ public class WebSession implements Serializable {
     public static final String MODERATOR_VK_ID = "id8208583";
     public static final String ADMINISTRATOR_VK_ID = "id15181992";
     private transient HttpSession session = null;
+    private boolean registered;
+    @EJB
+    GirlManagerLocal gm;
 
     public boolean isSignedIn() {
         boolean b = SessionUtils.isSignedIn();
         System.out.println("isSignedId = " + b);
         return b;
+    }
 
+    @PostConstruct
+    private void init() {
+        registered = gm.isGirlExits(getVkId());
+    }
+
+    public boolean isRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(boolean registered) {
+        this.registered = registered;
     }
 
     public String getVkId() {
@@ -45,7 +56,7 @@ public class WebSession implements Serializable {
             if (u != null) {
                 System.out.println("user = " + u);
                 if (u.equals(ADMINISTRATOR_VK_ID) || (u.equals(MODERATOR_VK_ID))) {
-                    
+
                     a = 1;
                 }
             }

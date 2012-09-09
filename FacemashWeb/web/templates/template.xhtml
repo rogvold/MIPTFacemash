@@ -5,16 +5,26 @@
         <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
             <link href="#{request.contextPath}/css/VkCSS.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?52"></script>
+            <script type="text/javascript">
+                VK.init({apiId: MIPT Facemash, onlyWidgets: true});
+            </script>
         </h:head>
 
         <h:body style="background-color: white;">
             <div class="header" style="overflow: visible;">
                 <a href="#{reguest.getContextPath()}/FacemashWeb/faces/index.xhtml" style="text-decoration: none;" >
-                    <h1 style="font-size: 3em; margin-top: 3px; color: #597DA3; font: 'Lucida Grande', 'Tahoma', 'Verdana','Arial','sans-serif'  ">
+                    <h1 style="font-size: 3em; width: 40%; display: inline-block; margin-top: 3px; color: #597DA3; font: 'Lucida Grande', 'Tahoma', 'Verdana','Arial','sans-serif'  ">
                         MIPT Facemash
                     </h1> 
                 </a>
-
+                <span style="width: 50%; display: inline-block; float: right;">
+                    <div id="vk_like"></div>
+                    <script type="text/javascript">
+//                        VK.init({apiId: MIPT Facemash, onlyWidgets: true});
+                        VK.Widgets.Like("vk_like", {type: "full"});
+                    </script>
+                </span>
             </div>
 
             <ui:insert name="vk_tabs">
@@ -30,6 +40,21 @@
             </ui:insert>
 
             <!--            </div>-->
+
+            <!--LiveInternet counter-->
+            <div style="display: none;">
+                <script type="text/javascript"><!--
+                    document.write("<a href='http://www.liveinternet.ru/click' "+
+                        "target=_blank><img src='//counter.yadro.ru/hit?t11.6;r"+
+                        escape(document.referrer)+((typeof(screen)=="undefined")?"":
+                        ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+                        screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+                        ";"+Math.random()+
+                        "' alt='' title='LiveInternet: number of pageviews for 24 hours,"+
+                        " of visitors for 24 hours and for today is shown' "+
+                        "border='0' width='88' height='31'><\/a>")
+                    //--></script><!--/LiveInternet-->
+            </div>
         </h:body>
     </f:view>
 </html>

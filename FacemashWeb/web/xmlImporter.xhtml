@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ppctu="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+    </h:head>
+    <body>
+        <h:form>
+            
+            <h:inputTextarea style="width: 60em; height: 40em;" value="#{xmlBean.xml}" />
+            <br/>
+            password: <h:inputText value="#{xmlBean.password}" />
+            <br/>
+            <ppctu:commandButton style="color: red; width: 20em; height: 7em;" actionListener="#{xmlBean.updateDB()}" value="UPDATE DB" />
+        </h:form>
+    </body>
+</html>

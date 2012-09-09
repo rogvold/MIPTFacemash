@@ -54,6 +54,17 @@ and open the template in the editor.
                     </h:panelGroup>
 
 
+                    <h:panelGroup rendered="#{tab_no==7}"> 
+                        <li class="current_link">
+                            <span><span class="tl"><span class="tr">Есть ли я здесь?</span></span></span>
+                        </li>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{tab_no!=7}">
+                        <li>
+                            <a href="#{request.contextPath}/faces/me.xhtml"><span class="tl"><span class="tr">Есть ли я здесь?</span></span></a>
+                        </li>
+                    </h:panelGroup> 
+
                     <h:panelGroup rendered="#{tab_no==3}"> 
                         <li class="current_link">
                             <span><span class="tl"><span class="tr">О проекте</span></span></span>
@@ -64,6 +75,8 @@ and open the template in the editor.
                             <a href="#{request.contextPath}/faces/about.xhtml"><span class="tl"><span class="tr">О проекте</span></span></a>
                         </li>
                     </h:panelGroup>
+
+
 
 
 
