@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:ppctu="http://primefaces.prime.com.tr/ui">
+
+
+    <body>
+        <ui:composition template="templates/template.xhtml">
+
+            <ui:define name="vk_tabs">
+                <ui:include src="templates/tabs.xhtml">
+                    <ui:param name="tab_no" value="8" />
+                </ui:include>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <div class="index_description" style="
+                     height: 130px; width: 600px;
+                     color: #666;
+                     padding: 10px;
+                     text-align: center;
+                     font-size: 13px;
+                     margin: 0 auto;
+                     margin-top: 50px;
+                     ">
+
+                    По многочисленным просьбам пользователей добавлена возможность добавлять анкеты знакомых.
+                    <br/>
+                    Укажите  <span style="font-weight: bold;" title="Например id15469466">ник вконтакте</span> и <span style="font-weight: bold;" title="Например http://cs406829.userapi.com/v406829466/a52/3R6huhIUcy8.jpg">ссылку</span> на желаемую фотографию. Администратор рассмотрит предложение.
+                    <br/>
+                    <br/>
+                    <h:panelGroup id="nr" >
+                        <h:form prependId="false" >
+                            <div style="margin: 0 auto;font-weight: bold; color: black;">
+                                <span style="display: inline-block; width: 110px;" >
+                                    ID:
+                                </span>
+                                <h:inputText value="#{proposalBean.friendVkId}" /><br/>
+                                <span style="display: inline-block; width: 110px;" >
+                                    Ссылка на фото:
+                                </span>
+                                <h:inputText value="#{proposalBean.friendImg}" />
+                                <br/><br/>
+                                <ppctu:commandButton  rendered="#{proposalBean.text.equals(' ')}"  actionListener="#{proposalBean.proposeGirlFriend()}" value="Отправить заявку" update="nr" style="width: 300px; display: block; margin:  0 auto;"   />
+                            </div>
+                        </h:form>
+                        <br/>
+                        <h:panelGroup id="congr" >
+                            <div style="width: 100%; display: block; text-align: center;">
+                                #{proposalBean.text}
+                            </div>
+
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                </div>
+
+            </ui:define>
+
+            <ui:define name="footer">
+                <ui:include src="templates/footer.xhtml" />
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

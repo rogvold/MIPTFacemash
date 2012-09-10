@@ -29,6 +29,7 @@ public class ModerationBean implements Serializable {
     private int page;
     private String updatingImg;
 
+
     public String getUpdatingImg() {
         return updatingImg;
     }
@@ -91,8 +92,9 @@ public class ModerationBean implements Serializable {
             gm.updateGirlImage(g.getId(), updatingImg);
         } catch (Exception e) {
         }
-
     }
+
+
 
 //    public void updateGirl(String ownerVkId,Long girlId) {
 //        gm.updateGirlImage(girlId, updatingImg);
@@ -107,6 +109,15 @@ public class ModerationBean implements Serializable {
 
     }
 
+    public double ratingByVkId(String vkId) {
+        try {
+            Girl g = gm.getGirlByVkId(vkId);
+            return g.getRating();
+        } catch (Exception e) {
+            return -1.0;
+        }
+    }
+
     public void nextPage() {
         System.out.println("nextPage...");
         initShort();
@@ -119,4 +130,5 @@ public class ModerationBean implements Serializable {
     public void recover(Long girlId) {
         gm.recoverGirl(girlId);
     }
+
 }

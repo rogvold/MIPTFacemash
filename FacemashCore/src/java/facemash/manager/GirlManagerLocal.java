@@ -20,6 +20,8 @@ public interface GirlManagerLocal {
     public void addGirl(String vk_id, String name, String img);
 
     public void addProposal(String vk_id);
+    
+    public void addFriendProposal(String vk_id,String imgSrc);
 
     public Girl getGirlByVkId(String vkId);
 

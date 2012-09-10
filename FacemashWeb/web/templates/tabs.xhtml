@@ -33,12 +33,12 @@ and open the template in the editor.
 
                     <h:panelGroup rendered="#{tab_no==2}"> 
                         <li class="current_link">
-                            <span><span class="tl"><span class="tr">Top 50</span></span></span>
+                            <span><span class="tl"><span class="tr" style="font-weight: bold;">Top 50</span></span></span>
                         </li>
                     </h:panelGroup>
                     <h:panelGroup rendered="#{tab_no!=2}">
                         <li>
-                            <a href="#{request.contextPath}/faces/top.xhtml"><span class="tl"><span class="tr">Top 50</span></span></a>
+                            <a href="#{request.contextPath}/faces/top.xhtml"><span class="tl"><span class="tr" style="font-weight: bold;" >Top 50</span></span></a>
                         </li>
                     </h:panelGroup>
 
@@ -64,6 +64,18 @@ and open the template in the editor.
                             <a href="#{request.contextPath}/faces/me.xhtml"><span class="tl"><span class="tr">Есть ли я здесь?</span></span></a>
                         </li>
                     </h:panelGroup> 
+                    
+                    <h:panelGroup rendered="#{tab_no==8}"> 
+                        <li class="current_link">
+                            <span><span class="tl"><span class="tr">Добавить знакомую!</span></span></span>
+                        </li>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{tab_no!=8}">
+                        <li>
+                            <a href="#{request.contextPath}/faces/addFriend.xhtml"><span class="tl"><span class="tr">Добавить знакомую!</span></span></a>
+                        </li>
+                    </h:panelGroup>
+                    
 
                     <h:panelGroup rendered="#{tab_no==3}"> 
                         <li class="current_link">

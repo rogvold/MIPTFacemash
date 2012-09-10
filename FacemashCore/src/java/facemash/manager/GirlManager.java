@@ -23,13 +23,13 @@ import javax.persistence.Query;
  */
 @Stateless
 public class GirlManager implements GirlManagerLocal {
-    
+
     @PersistenceContext(unitName = "FacemashPU")
     EntityManager em;
     private static Random random = new Random();
     public static final int MAX_RANDOM = 100000000;
     public static final int MAX_GIRLS_AMOUNT_IN_LIST = 50;
-    
+
     @Override
     public void addGirl(String vk_id, String name, String img) {
         try {
@@ -42,7 +42,7 @@ public class GirlManager implements GirlManagerLocal {
             System.out.println("exc = " + ex);
         }
     }
-    
+
     @Override
     public void addProposal(String vk_id) {
         try {
@@ -57,11 +57,11 @@ public class GirlManager implements GirlManagerLocal {
             System.out.println("exc = " + ex);
         }
     }
-    
+
     private boolean alreadyEnlarged(String s) {
         return (s.indexOf("a_") >= 0);
     }
-    
+
     @Override
     public Girl getGirlByVkId(String vkId) {
 //        EntityManager em = db.getEntityManager();
@@ -78,10 +78,10 @@ public class GirlManager implements GirlManagerLocal {
         } catch (Exception e) {
             return null;
         }
-        
+
         return null;
     }
-    
+
     @Override
     public void updateGirl(Long girlId, double newRating, int n) {
 //        EntityManager em = db.getEntityManager();
@@ -94,7 +94,7 @@ public class GirlManager implements GirlManagerLocal {
 //            db.rollback();
         }
     }
-    
+
     private int getK(Girl girl) {
         if (girl.getAmountOfTournaments() <= 30) {
             return 30;
@@ -107,7 +107,7 @@ public class GirlManager implements GirlManagerLocal {
         }
         return 10;
     }
-    
+
     @Override
     public void updateRating(Girl a, Girl b, int sA) {
         try {
@@ -124,25 +124,25 @@ public class GirlManager implements GirlManagerLocal {
             b.setRating(b.getRating() + getK(b) * (sB - Eb));
             updateGirl(a.getId(), a.getRating(), a.getAmountOfTournaments() + 1);
             updateGirl(b.getId(), b.getRating(), b.getAmountOfTournaments() + 1);
-            
+
         } catch (Exception e) {
             System.out.println("updateRating(Girl a, Girl b, int sA) exc = " + e);
         }
-        
+
     }
-    
+
     @Override
     public Girl getRandomGirl() {
         try {
-            List<Girl> list = em.createQuery("select g from Girl g where g.status= " + Girl.STATUS_NORMAL + " order by g.id asc").getResultList();
+            List<Girl> list = em.createQuery("select g from Girl g where ( g.status = " + Girl.STATUS_NORMAL + ") or ( g.status = " + Girl.STATUS_MODERATION + ") order by g.id asc").getResultList();
             int r = random.nextInt(MAX_RANDOM) % list.size();
             return list.get(r);
         } catch (Exception e) {
             return null;
         }
-        
+
     }
-    
+
     @Override
     public Girl getRandomGirlExceptForThisOne(Long girlId) {
         if (girlId == null) {
@@ -160,9 +160,9 @@ public class GirlManager implements GirlManagerLocal {
         } catch (Exception e) {
             return null;
         }
-        
+
     }
-    
+
     private void saveToDatabase(List<Girl> girls) {
         if (girls == null) {
             System.out.println("void list....");
@@ -174,7 +174,7 @@ public class GirlManager implements GirlManagerLocal {
             addGirl(g.getVkId(), g.getName(), g.getImg());
         }
     }
-    
+
     @Override
     public void importGirlsFromHtml(String filename) {
         try {
@@ -190,7 +190,7 @@ public class GirlManager implements GirlManagerLocal {
             Logger.getLogger(GirlManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void deleteGirls(String secret) {
         System.out.println("deleting all girls");
@@ -203,23 +203,23 @@ public class GirlManager implements GirlManagerLocal {
         } catch (Exception e) {
             System.out.println("EJB:deleteGirls exc = " + e);
         }
-        
-        
+
+
     }
-    
+
     @Override
     public List<Girl> getAllGirls() {
         try {
-            Query q = em.createQuery("select g from Girl g where g.status= " + Girl.STATUS_NORMAL + " order by g.rating desc");
+            Query q = em.createQuery("select g from Girl g where ( g.status= " + Girl.STATUS_NORMAL + " ) or ( g.status = " + Girl.STATUS_MODERATION + ") order by g.rating desc");
             q.setMaxResults(MAX_GIRLS_AMOUNT_IN_LIST);
             return q.getResultList();
         } catch (Exception exc) {
             System.out.println("EJB:getAllGirls: exc = " + exc);
         }
         return null;
-        
+
     }
-    
+
     @Override
     public Girl getGirlById(Long girlId) {
         if (girlId == null) {
@@ -231,12 +231,12 @@ public class GirlManager implements GirlManagerLocal {
         }
         return null;
     }
-    
+
     @Override
     public String getAvatarUrlFromProfile(String vkId) {
         return ParserUtils.getAvatarUrlFromProfile(vkId);
     }
-    
+
     @Override
     public void enlargePictureOfGirl(Girl girl) {
         if (alreadyEnlarged(girl.getImg())) {
@@ -249,9 +249,9 @@ public class GirlManager implements GirlManagerLocal {
             girl.setImg(s);
             em.merge(girl);
         }
-        
+
     }
-    
+
     @Override
     public void enlargeAllPhotos() {
         System.out.println("enlarging all photos...");
@@ -263,7 +263,7 @@ public class GirlManager implements GirlManagerLocal {
             enlargePictureOfGirl(g);
         }
     }
-    
+
     @Override
     public List<Girl> getAllGirls(int amount) {
         try {
@@ -275,7 +275,7 @@ public class GirlManager implements GirlManagerLocal {
         }
         return null;
     }
-    
+
     @Override
     public void deleteGirl(Long girlId) {
         try {
@@ -284,12 +284,14 @@ public class GirlManager implements GirlManagerLocal {
             }
             Girl g = em.find(Girl.class, girlId);
             System.out.println("removing girl id = " + girlId);
-            em.remove(g);
+            g.setStatus(Girl.STATUS_DELETED);
+            em.merge(g);
+//            em.remove(g);
         } catch (Exception e) {
             System.out.println("cannot erase girl exc = " + e);
         }
     }
-    
+
     @Override
     public Girl updateGirlImage(Long girlId, String newImg) {
         System.out.println("updateGirl: girlId = " + girlId + " / newImg = " + newImg);
@@ -297,7 +299,7 @@ public class GirlManager implements GirlManagerLocal {
             return null;
         }
         try {
-            
+
             Girl girl = em.find(Girl.class, girlId);
             if (newImg == null) {
                 return girl;
@@ -309,7 +311,7 @@ public class GirlManager implements GirlManagerLocal {
             return null;
         }
     }
-    
+
     @Override
     public void toModeration(Long girlId) {
 //        throw new UnsupportedOperationException("Not supported yet.");
@@ -321,7 +323,7 @@ public class GirlManager implements GirlManagerLocal {
             System.out.println("cannot add girl to moderation");
         }
     }
-    
+
     @Override
     public List<Girl> getBlackList() {
 //        throw new UnsupportedOperationException("Not supported yet.");
@@ -334,7 +336,7 @@ public class GirlManager implements GirlManagerLocal {
         }
         return null;
     }
-    
+
     @Override
     public void recoverGirl(Long girlId) {
         try {
@@ -345,7 +347,7 @@ public class GirlManager implements GirlManagerLocal {
             System.out.println("cannot recover girl; exc = " + e);
         }
     }
-    
+
     @Override
     public boolean isGirlExits(String vkId) {
         Query q = em.createQuery("select g from Girl g where g.vkId = '" + vkId + "'");
@@ -356,9 +358,9 @@ public class GirlManager implements GirlManagerLocal {
             return false;
         }
     }
-    
+
     private boolean areCompliantVkIdandGirlId(String vkId, Long girlId) {
-        
+
         try {
             Girl g = em.find(Girl.class, girlId);
             if (g.getVkId().equals(vkId)) {
@@ -369,9 +371,9 @@ public class GirlManager implements GirlManagerLocal {
         } catch (Exception e) {
             return false;
         }
-        
+
     }
-    
+
     @Override
     public void deleteGirl(String ownerVkId, Long girlId) {
         if (areCompliantVkIdandGirlId(ownerVkId, girlId)) {
@@ -382,5 +384,21 @@ public class GirlManager implements GirlManagerLocal {
     @Override
     public List<Girl> getProposals() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void addFriendProposal(String vk_id, String imgSrc) {
+        try {
+            Girl girl = new Girl();
+            girl.setVkId(vk_id);
+            girl.setImg(imgSrc);
+            girl.setStatus(Girl.STATUS_HIDDEN_FRIEND);
+            if (getGirlByVkId(vk_id) == null) {
+                em.persist(girl);
+                System.out.println("added new friend proposal for girl vkId = " + vk_id);
+            }
+        } catch (Exception ex) {
+            System.out.println("exc = " + ex);
+        }
     }
 }

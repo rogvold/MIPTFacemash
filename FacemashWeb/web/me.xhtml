@@ -19,7 +19,7 @@ and open the template in the editor.
             <ui:define name="content">
                 <h2>
                     <c:if test="#{webSession.registered}">
-                        Ваша анкета есть в системе!
+                        Ваша анкета есть в системе! (rating = #{moderationBean.ratingByVkId(webSession.vkId)})
                     </c:if>
 
                     <c:if test="#{!webSession.registered}">

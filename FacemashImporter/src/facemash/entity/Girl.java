@@ -19,6 +19,7 @@ public class Girl implements Serializable {
     public static final int STATUS_DELETED = 1;
     public static final int STATUS_HIDDEN = 2;
     public static final int STATUS_MODERATION = 3;
+    public static final int STATUS_HIDDEN_FRIEND = 4;
     private static final long serialVersionUID = 1L;
 
     private Long id;
